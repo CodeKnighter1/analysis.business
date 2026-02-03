@@ -4,7 +4,7 @@ import { AnalysisResult } from "@/components/AnalysisResult";
 import { analyzeIdea } from "@/lib/analyzeIdea";
 import type { IdeaAnalysis } from "@/types/analysis";
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Sparkles, TrendingUp, Shield } from "lucide-react";
+import { RotateCcw, TrendingUp, Lightbulb, Cpu, BarChart3, Rocket } from "lucide-react";
 import NeuralBackground from "@/components/animated-shader-background";
 
 const Index = () => {
@@ -33,10 +33,10 @@ const Index = () => {
         speed={0.6}
         className="z-0"
       />
-      
+
       {/* Gradient Overlay for depth */}
       <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-black/60 z-1 pointer-events-none" />
-      
+
       <div className="relative z-10 flex flex-col justify-center">
         {/* Enhanced Header */}
         <header className="border-b border-white/10 backdrop-blur-xl bg-black/30">
@@ -50,9 +50,9 @@ const Index = () => {
                 </div>
               </div>
               {analysis && (
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={handleReset}
                   className="bg-white/5 border-white/20 hover:bg-white/10 text-white cursor-pointer backdrop-blur-sm"
                 >
@@ -78,7 +78,7 @@ const Index = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <h2 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">
                   Haqiqatni bilib oling.
                   <br />
@@ -86,9 +86,9 @@ const Index = () => {
                     Motivatsiya emas.
                   </span>
                 </h2>
-                
+
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Biznes g'oyangizni uchta muhim nuqtai nazardan tahlil qiling: 
+                  Biznes g'oyangizni uchta muhim nuqtai nazardan tahlil qiling:
                   muammo, shoshilinchlik va moliyaviy imkoniyat.
                 </p>
               </div>
@@ -98,53 +98,82 @@ const Index = () => {
                 <IdeaForm onSubmit={handleAnalyze} isAnalyzing={isAnalyzing} />
               </div>
 
-              {/* How It Works */}
-              <div className="max-w-4xl mx-auto space-y-6 py-8">
-                <h3 className="text-2xl font-display font-bold text-center text-white mb-8">
-                  Qanday ishlaydi?
-                </h3>
-                <div className="grid gap-4">
-                  {[
-                    {
-                      step: "01",
-                      title: "G'oyangizni kiriting",
-                      description: "Biznes g'oyangizni qisqacha, lekin aniq tarzda yozing"
-                    },
-                    {
-                      step: "02",
-                      title: "AI tahlil qiladi",
-                      description: "Sun'iy intellekt g'oyangizni 3 ta muhim parametr bo'yicha baholaydi"
-                    },
-                    {
-                      step: "03",
-                      title: "Natijalarni oling",
-                      description: "Batafsil tahlil, ball va keyingi qadamlar bo'yicha tavsiyalar"
-                    },
-                    {
-                      step: "04",
-                      title: "Harakat qiling",
-                      description: "7 kunlik aniq rejaga amal qiling va g'oyangizni sinab ko'ring"
-                    }
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex gap-6 p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all group"
-                    >
-                      <div className="shrink-0 w-12 h-12 rounded-lg bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-display font-bold text-lg group-hover:scale-110 transition-transform">
-                        {item.step}
-                      </div>
-                      <div className="space-y-1">
-                        <h4 className="text-lg font-display font-bold text-white">
+              {/* How It Works Section */}
+              <section className="py-20 px-4 relative overflow-hidden">
+                {/* Orqa fon uchun dekorativ nur */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full -z-10" />
+
+                <div className="max-w-6xl mx-auto">
+                  <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                      Muvaffaqiyatga 4 qadam
+                    </h2>
+                    <p className="text-gray-400 max-w-xl mx-auto">
+                      G'oyangizni tahlil qilishdan tortib, real natijalargacha bo'lgan jarayon juda oson va tez.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                    {/* Bog'lovchi chiziq (faqat desktopda ko'rinadi) */}
+                    <div className="hidden lg:block absolute top-1/4 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-white/10 to-transparent -z-10" />
+
+                    {[
+                      {
+                        step: "01",
+                        title: "G'oyangizni kiriting",
+                        description: "Biznes g'oyangizni qisqacha, lekin aniq tarzda yozing",
+                        icon: <Lightbulb className="w-6 h-6" />,
+                        color: "from-yellow-400 to-orange-500"
+                      },
+                      {
+                        step: "02",
+                        title: "AI tahlil qiladi",
+                        description: "Sun'iy intellekt g'oyangizni 3 ta muhim parametr bo'yicha baholaydi",
+                        icon: <Cpu className="w-6 h-6" />,
+                        color: "from-blue-400 to-indigo-600"
+                      },
+                      {
+                        step: "03",
+                        title: "Natijalarni oling",
+                        description: "Batafsil tahlil, ball va keyingi qadamlar bo'yicha tavsiyalar",
+                        icon: <BarChart3 className="w-6 h-6" />,
+                        color: "from-purple-400 to-pink-600"
+                      },
+                      {
+                        step: "04",
+                        title: "Harakat qiling",
+                        description: "7 kunlik aniq rejaga amal qiling va g'oyangizni sinab ko'ring",
+                        icon: <Rocket className="w-6 h-6" />,
+                        color: "from-emerald-400 to-cyan-600"
+                      }
+                    ].map((item, index) => (
+                      <div
+                        key={index}
+                        className="relative group p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
+                      >
+                        {/* Step Number Badge */}
+                        <div className={`absolute -top-4 -left-4 w-10 h-10 rounded-full bg-linear-to-br ${item.color} flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-black/20`}>
+                          {item.step}
+                        </div>
+
+                        <div className="mb-6 inline-flex p-3 rounded-xl bg-white/5 text-white group-hover:scale-110 transition-transform duration-300">
+                          {item.icon}
+                        </div>
+
+                        <h3 className="text-xl font-display font-bold text-white mb-3 leading-tight">
                           {item.title}
-                        </h4>
-                        <p className="text-sm text-gray-400">
+                        </h3>
+                        <p className="text-sm text-gray-400 leading-relaxed leading-relaxed">
                           {item.description}
                         </p>
+
+                        {/* Hover effekt uchun pastki chiziq */}
+                        <div className={`absolute bottom-0 left-0 h-1 bg-linear-to-r ${item.color} w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl`} />
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </section>
             </div>
           ) : (
             <AnalysisResult analysis={analysis} />
