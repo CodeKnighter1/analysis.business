@@ -28,8 +28,8 @@ const Index = () => {
       {/* Neural Background */}
       <NeuralBackground
         color="#000000"
-        particleCount={400}
-        trailOpacity={0.08}
+        particleCount={500}
+        trailOpacity={0.09}
         speed={0.6}
         className="z-0"
       />
@@ -40,28 +40,21 @@ const Index = () => {
       <div className="relative z-10 flex flex-col justify-center">
         {/* Enhanced Header */}
         <header className="border-b border-white/10 backdrop-blur-xl bg-black/30">
-          <div className="container max-w-6xl py-8 mx-auto">
+          <div className="container max-w-6xl py-4 mx-auto">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-linear-to-br from-blue-500 via-purple-500 to-green-500 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
-                  </div>
                   <h1 className="text-3xl font-display font-bold tracking-tight bg-linear-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">
                     CLARITY ENGINE
                   </h1>
                 </div>
-                <p className="text-sm text-gray-400 ml-[52px] flex items-center gap-2">
-                  <Shield className="w-3 h-3" />
-                  G'oyalaringizni tezkor tahlil qiling. Kuchli g'oyalarni aniqlashtiring.
-                </p>
               </div>
               {analysis && (
                 <Button 
                   variant="outline" 
                   size="sm" 
                   onClick={handleReset}
-                  className="bg-white/5 border-white/20 hover:bg-white/10 text-white backdrop-blur-sm"
+                  className="bg-white/5 border-white/20 hover:bg-white/10 text-white cursor-pointer backdrop-blur-sm"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Yangi G'oya
@@ -72,7 +65,7 @@ const Index = () => {
         </header>
 
         {/* Main Content */}
-        <main className="container max-w-6xl py-12 mx-auto">
+        <main className="container max-w-6xl py-8 mx-auto">
           {!analysis ? (
             <div className="space-y-12">
               {/* Hero Section */}
@@ -98,51 +91,6 @@ const Index = () => {
                   Biznes g'oyangizni uchta muhim nuqtai nazardan tahlil qiling: 
                   muammo, shoshilinchlik va moliyaviy imkoniyat.
                 </p>
-              </div>
-
-              {/* Three Pillars */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                {[
-                  {
-                    title: "Muammo (Pain)",
-                    question: "Bu haqiqiy muammomi?",
-                    description: "Odamlar bu muammoni hal qilish uchun haqiqatan azob chekadimi?",
-                    gradient: "from-red-500/20 to-orange-500/20",
-                    border: "border-red-500/30",
-                  },
-                  {
-                    title: "Shoshilinchlik (Urgency)",
-                    question: "Nega hozir?",
-                    description: "Nima uchun mijozlar aynan hozir yechim qidirishyapti?",
-                    gradient: "from-blue-500/20 to-cyan-500/20",
-                    border: "border-blue-500/30",
-                  },
-                  {
-                    title: "Pul (Money)",
-                    question: "Ular to'lasharmikan?",
-                    description: "Mijozlar bu yechim uchun pul sarflashga tayyormi?",
-                    gradient: "from-green-500/20 to-emerald-500/20",
-                    border: "border-green-500/30",
-                  }
-                ].map((pillar, index) => (
-                  <div
-                    key={index}
-                    className={`relative group p-6 rounded-2xl bg-linear-to-br ${pillar.gradient} border ${pillar.border} backdrop-blur-xl hover:scale-105 transition-all duration-300`}
-                  >
-                    <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
-                    <div className="relative space-y-4">
-                      <h3 className="text-xl font-display font-bold text-white">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-sm text-gray-300 font-medium">
-                        {pillar.question}
-                      </p>
-                      <p className="text-xs text-gray-400 leading-relaxed">
-                        {pillar.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
               </div>
 
               {/* Form Section */}

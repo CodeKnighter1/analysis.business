@@ -44,7 +44,7 @@ Include:
         type="submit"
         variant="secondary"
         size="lg"
-        className="w-full"
+        className="w-full cursor-pointer"
         disabled={!idea.trim() || isAnalyzing}
       >
         {isAnalyzing ? (
