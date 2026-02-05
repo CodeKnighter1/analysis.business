@@ -50,9 +50,12 @@
   --sidebar-ring: oklch(0.705 0.015 286.067);
 
   /* Verdict colors (used by bg-verdict-*, text-verdict-*, border-verdict-*) */
-  --verdict-go: oklch(0.75 0.19 155);   /* neon green */
-  --verdict-pivot: oklch(0.84 0.16 85); /* neon amber */
-  --verdict-kill: oklch(0.67 0.22 25);  /* neon red */
+  --verdict-go: oklch(0.75 0.19 155);
+  /* neon green */
+  --verdict-pivot: oklch(0.84 0.16 85);
+  /* neon amber */
+  --verdict-kill: oklch(0.67 0.22 25);
+  /* neon red */
 }
 
 body {
@@ -101,12 +104,16 @@ body {
   --color-verdict-go: var(--verdict-go);
   --color-verdict-pivot: var(--verdict-pivot);
   --color-verdict-kill: var(--verdict-kill);
+
   @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+
+    0%,
+    100% {
+      transform: translateY(0px);
     }
-  50% {
-    transform: translateY(-10px);
+
+    50% {
+      transform: translateY(-10px);
     }
   }
 }
@@ -152,6 +159,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -159,8 +167,38 @@ body {
 
 @layer components {
   .glass-panel {
-    @apply bg-card/60 backdrop-blur-md border border-border shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_20px_80px_-40px_rgba(0,255,220,0.25)];
+    @apply bg-card/60 backdrop-blur-md border border-border shadow-[0_0_0_1px_rgba(255, 255, 255, 0.03), 0_20px_80px_-40px_rgba(0, 255, 220, 0.25)];
   }
+}
+
+
+/* Custom Uiverse Animations */
+@keyframes rotate-conic {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.animate-conic-rotate::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  animation: rotate-conic 4s linear infinite;
+}
+
+.conic-glow::before {
+  background-image: conic-gradient(#000, #402fb5 5%, #000 38%, #000 50%, #cf30aa 60%, #000 87%);
+}
+
+.conic-border::before {
+  background-image: conic-gradient(#1c191c, #402fb5 5%, #1c191c 14%, #1c191c 50%, #cf30aa 60%, #1c191c 64%);
 }
 
 
@@ -168,18 +206,24 @@ body {
 /* Enhanced animations for the Clarity Engine */
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
   }
@@ -189,6 +233,7 @@ body {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -199,6 +244,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -210,6 +256,7 @@ body {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -221,6 +268,7 @@ body {
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -231,9 +279,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -261,12 +311,10 @@ body {
 }
 
 .animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
@@ -389,6 +437,7 @@ body {
     transform: scale(0.8);
     opacity: 1;
   }
+
   100% {
     transform: scale(1.5);
     opacity: 0;
@@ -397,12 +446,10 @@ body {
 
 /* Loading states */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.05) 75%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 75%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -415,6 +462,7 @@ body {
 
 /* Responsive animations */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

@@ -41,27 +41,27 @@ function analyzeLens(text: string, strong: string[], weak: string[], lensName: s
     // Generate analysis points based on lens
     if (lensName === 'Pain') {
         if (score === 'strong') {
-            points = ['Clear, frequent pain point identified', 'Customer actively suffers from this problem'];
+            points = ['Aniq, tez-tez uchraydigan muammo aniqlandi', 'Mijoz bu muammodan faol azob chekmoqda'];
         } else if (score === 'weak') {
-            points = ['Pain is not clearly articulated', 'May be a "nice to have" rather than essential'];
+            points = ['Muammo aniq ifodalanmagan', '"Yaxshi bo\'lardi" darajasida, zaruriy emas'];
         } else {
-            points = ['Pain exists but frequency unclear', 'Need more customer evidence'];
+            points = ['Muammo mavjud, lekin chastotasi noaniq', 'Qo\'shimcha mijoz dalillari kerak'];
         }
     } else if (lensName === 'Urgency') {
         if (score === 'strong') {
-            points = ['Time-sensitive problem', 'Clear consequences for inaction'];
+            points = ['Vaqtga bog\'liq muammo', 'Harakat qilmaslik oqibatlari aniq'];
         } else if (score === 'weak') {
-            points = ['No compelling reason to act now', 'Customer can delay indefinitely'];
+            points = ['Hozir harakat qilish uchun majburlovchi sabab yo\'q', 'Mijoz cheksiz kechiktirishi mumkin'];
         } else {
-            points = ['Some urgency exists', 'Triggering events unclear'];
+            points: ['Shoshilinchlik mavjud', 'Tetiklovchi hodisalar noaniq'];
         }
     } else {
         if (score === 'strong') {
-            points = ['Clear willingness to pay', 'Identifiable budget exists'];
+            points = ['To\'lashga aniq tayorlik', 'Aniqlanadigan byudjet mavjud'];
         } else if (score === 'weak') {
-            points = ['No clear monetization path', 'Customers expect free solutions'];
+            points = ['Aniq monetizatsiya yo\'li yo\'q', 'Mijozlar bepul yechimlarni kutishadi'];
         } else {
-            points = ['Potential for payment exists', 'Business model needs validation'];
+            points = ['To\'lov imkoniyati mavjud', 'Biznes model tasdiqlanishi kerak'];
         }
     }
 
@@ -100,15 +100,15 @@ function generateSignals(pain: LensAnalysis, urgency: LensAnalysis, money: LensA
     const weakest = sorted[sorted.length - 1];
 
     const strongestMessages = {
-        Pain: 'Real problem that causes measurable suffering.',
-        Urgency: 'Time-sensitive trigger that forces action.',
-        Money: 'Clear path to customer wallet.',
+        Pain: 'Haqiqiy muammo, o\'lchanadigan azob keltiradi.',
+        Urgency: 'Vaqtga bog\'liq tetiklovchi, harakatga majbur qiladi.',
+        Money: 'Mijoz hamyoniga aniq yo\'l.',
     };
 
     const weakestMessages = {
-        Pain: 'Problem exists but is tolerable. Customers live with it.',
-        Urgency: 'No deadline. No burning platform. Easy to ignore.',
-        Money: 'Payment path unclear. Who pays and why?',
+        Pain: 'Muammo mavjud, lekin toqat qilinadigan. Mijozlar u bilan yashaydilar.',
+        Urgency: 'Muddat yo\'q. Yonayotgan platforma yo\'q. E\'tiborsiz qoldirish oson.',
+        Money: 'To\'lov yo\'li noaniq. Kim va nima uchun to\'laydi?',
     };
 
     return {
@@ -120,43 +120,43 @@ function generateSignals(pain: LensAnalysis, urgency: LensAnalysis, money: LensA
 function generateRealityCheck(verdict: Verdict, pain: LensAnalysis, urgency: LensAnalysis, money: LensAnalysis): string {
     if (verdict === 'KILL') {
         if (money.score === 'weak') {
-            return 'Ideas that feel good but don\'t make money are hobbies, not businesses.';
+            return 'Yaxshi his qiladigan, lekin pul keltirmaydigan g\'oyalar - bu biznes emas, sevimli mashg\'ulot.';
         }
         if (pain.score === 'weak') {
-            return 'You\'re more excited about this than your customers ever will be.';
+            return 'Siz bu g\'oyadan mijozlaringizdan ko\'ra ko\'proq hayajondamisiz.';
         }
-        return 'Without urgency, your biggest competitor is "do nothing."';
+        return 'Shoshilinchlik bo\'lmasa, eng katta raqibingiz - "hech narsa qilmaslik".';
     }
 
     if (verdict === 'PIVOT') {
         if (money.score === 'unclear') {
-            return 'You have a problem worth solving, but no clear buyer. Find the budget.';
+            return 'Sizda hal qilishga arziydigan muammo bor, lekin aniq xaridor yo\'q. Byudjetni toping.';
         }
         if (urgency.score === 'weak') {
-            return 'Good idea, but "nice to have" never wins sales cycles.';
+            return 'Yaxshi g\'oya, lekin "yaxshi bo\'lardi" hech qachon savdo tsikllarida g\'alaba qozonmaydi.';
         }
-        return 'There\'s something here, but you\'re solving a symptom, not the root cause.';
+        return 'Bu yerda nimadir bor, lekin siz simptomni hal qilyapsiz, ildiz sababini emas.';
     }
 
-    return 'Strong signals, but execution will still be harder than you think.';
+    return 'Kuchli signallar, lekin bajarilish hali ham o\'ylaganingizdan qiyinroq bo\'ladi.';
 }
 
 function generateNextStep(verdict: Verdict, urgency: LensAnalysis, money: LensAnalysis): string {
     if (verdict === 'KILL') {
-        return 'Talk to 5 potential customers this week. Ask: "How are you solving this today?" If they shrug, move on.';
+        return 'Bu hafta 5 ta potentsial mijoz bilan gaplashing. So\'rang: "Bugungi kunda buni qanday hal qilyapsiz?" Agar ular yelka qisishsa, oldinga o\'ting.';
     }
 
     if (verdict === 'PIVOT') {
         if (money.score !== 'strong') {
-            return 'Find 3 people in your target market. Ask what they currently pay for related solutions.';
+            return 'Maqsadli bozoringizda 3 kishini toping. Shunga o\'xshash yechimlar uchun hozir nima to\'lashlarini so\'rang.';
         }
         if (urgency.score !== 'strong') {
-            return 'Identify the triggering event that would make someone need this RIGHT NOW.';
+            return 'Kimnidir bunga HOZIR muhtoj qiladigan tetiklovchi hodisani aniqlang.';
         }
-        return 'Narrow your target. Who experiences this pain most intensely?';
+        return 'Maqsadingizni toraytiring. Bu og\'riqni eng kuchli kim his qiladi?';
     }
 
-    return 'Build the smallest thing that delivers value. Get 1 paying customer in 7 days.';
+    return 'Qiymat etkazadigan eng kichik narsani yarating. 7 kun ichida 1 ta to\'lovchi mijozni qo\'lga kiriting.';
 }
 
 export function analyzeIdea(idea: string): IdeaAnalysis {
