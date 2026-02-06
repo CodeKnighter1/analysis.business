@@ -4,6 +4,9 @@ import { HeroSection } from '@/components/home/HeroSection';
 import { HowItWorks } from '@/components/home/HowItWorks';
 import { DomainSection } from '@/components/home/DomainSection';
 import { PowerBusiness } from '@/components/home/PowerBusiness';
+import { BringYourBrand } from '@/components/home/BringYourBrand';
+import { ScaleWithoutChanging } from '@/components/home/ScaleChange';
+import { FAQ } from '@/components/home/FAQ';
 
 export default function Index() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -49,6 +52,9 @@ export default function Index() {
       <HowItWorks />
       <DomainSection />
       <PowerBusiness />
+      <BringYourBrand />
+      <ScaleWithoutChanging />
+      <FAQ />
     </div>
   );
 }

@@ -1,0 +1,7 @@
+src/components/home/BringYourBrand.tsx(2,22): error TS6133: 'Sparkles' is declared but its value is never read.
+src/components/home/DomainSection.tsx(2,1): error TS6192: All imports in import declaration are unused.
+src/components/home/IdeaForm.tsx(3,10): error TS6133: 'MousePointer2' is declared but its value is never read.
+src/components/home/IdeaForm.tsx(3,25): error TS6133: 'Wand2' is declared but its value is never read.
+src/components/home/PowerBusiness.tsx(37,12): error TS6133: 'direction' is declared but its value is never read.
+src/components/home/ScaleChange.tsx(2,10): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/components/home/ScaleChange.tsx(2,22): error TS6133: 'Gauge' is declared but its value is never read.

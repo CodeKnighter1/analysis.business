@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
-import { MousePointer2, Wand2, Plus } from 'lucide-react'; // Ikonkalarni rasmdagiga o'xshatish
+import { Plus } from 'lucide-react'; // Ikonkalarni rasmdagiga o'xshatish
 
 interface IdeaFormProps {
   onSubmit: (data: { idea: string }) => void;
@@ -24,8 +24,8 @@ export const IdeaForm: React.FC<IdeaFormProps> = ({ onSubmit, isAnalyzing }) => 
         <Textarea
           value={idea}
           onChange={(e) => setIdea(e.target.value)}
-          placeholder="Make a clean SaaS homepage for an AI tool."
-          className="max-w-7xl min-h-[45px] text-lg text-gray-800 placeholder:text-gray-600 border-0 focus-visible:ring-0 focus-visible:outline-none bg-transparent resize-none p-2"
+          placeholder="Make a clean SaaS homepage"
+          className="max-w-7xl min-h-[40px] text-lg text-[#242425] placeholder:text-gray-800 border-0 focus-visible:ring-0 focus-visible:outline-none bg-[#f9fbff] resize-none p-2"
           disabled={isAnalyzing}
         />
 
@@ -40,10 +40,10 @@ export const IdeaForm: React.FC<IdeaFormProps> = ({ onSubmit, isAnalyzing }) => 
               <button
                 key={idx}
                 type="button"
-                className="group relative flex items-center p-1.5 pr-5 rounded-xl bg-white/40 border border-white/60 shadow-[0_4px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.06)] transition-all duration-300 active:scale-95"
+                className="group relative flex items-center p-1.5 pr-2 md:pr-4 rounded-xl bg-white/40 border border-white/60 shadow-[0_4px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.06)] transition-all duration-300 active:scale-95"
               >
                 {/* Ikonka uchun ichki oq kvadrat quti */}
-                <div className="w-9 h-9 flex items-center justify-center bg-white rounded-xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.02),0_2px_5px_rgba(0,0,0,0.05)] mr-3">
+                <div className="w-6 h-6 md:w-9 md:h-9 flex items-center justify-center bg-white rounded-xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.02),0_2px_5px_rgba(0,0,0,0.05)] mr-3">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -62,20 +62,20 @@ export const IdeaForm: React.FC<IdeaFormProps> = ({ onSubmit, isAnalyzing }) => 
           </div>
 
           {/* Right Side - Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-4">
             {/* Plus Button */}
             <button
               type="button"
-              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all shadow-sm text-gray-400"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all shadow-sm text-gray-400"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             {/* Submit Arrow Button - Rasmdagi ko'k rang */}
             <button
               type="submit"
               disabled={!idea.trim() || isAnalyzing}
-              className="w-10 h-10 rounded-full bg-[#4D94FF] hover:bg-[#3b82f6] disabled:bg-blue-300 flex items-center justify-center transition-all shadow-lg hover:shadow-blue-200 text-white disabled:cursor-not-allowed"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#4D94FF] hover:bg-[#3b82f6] disabled:bg-blue-300 flex items-center justify-center transition-all shadow-lg hover:shadow-blue-200 text-white disabled:cursor-not-allowed"
             >
               <svg
                 className="w-5 h-5 stroke-[2.5]"

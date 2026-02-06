@@ -10,10 +10,10 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onSubmit, isAnalyzing }) => {
   return (
-    <div className="relative min-h-screen pb-4 flex flex-col items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen pb-4 md:px-4 flex flex-col items-center justify-center overflow-hidden">
       {/* Background Image - Rasmdagidek to'liq qoplash */}
       <div className="absolute inset-0 z-10">
-        <img src={picone} alt="background image for hero section" className='w-full h-full rounded-b-2xl' />
+        <img src={picone} alt="background image for hero section" className='w-full h-full object-cover px-0 lg:px-4 pb-0 lg:pb-4 rounded-b-3xl' />
       </div>
 
       {/* Content */}

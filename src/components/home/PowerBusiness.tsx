@@ -1,114 +1,178 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const categories = [
-    { id: 'sell', label: 'Sell', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80' },
-    { id: 'book', label: 'Book', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80' },
-    { id: 'blog', label: 'Blog', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80' },
-    { id: 'contact', label: 'Contact', image: 'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1200&q=80' },
+    {
+        id: 'sell',
+        label: 'Sell',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80',
+        title: 'Sell A Product',
+        description: "Boost your efficiency with Webild's custom sell engine and give your customers a premium experience."
+    },
+    {
+        id: 'book',
+        label: 'Book',
+        image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&q=80',
+        title: 'Book A Service',
+        description: "Boost your efficiency with Webild's custom booking engine and give your customers a premium experience."
+    },
+    {
+        id: 'blog',
+        label: 'Blog',
+        image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1920&q=80',
+        title: 'Blog Content',
+        description: "Boost your efficiency with Webild's custom blog engine and give your customers a premium experience."
+    },
+    {
+        id: 'contact',
+        label: 'Contact',
+        image: 'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80',
+        title: 'Contact Us',
+        description: "Boost your efficiency with Webild's custom contact engine and give your customers a premium experience."
+    },
 ];
 
 export const PowerBusiness = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    // 4 soniyalik taymer
+    // Auto-carousel
     useEffect(() => {
-        const timer = setInterval(() => {
-            nextStep();
+        autoPlayRef.current = setInterval(() => {
+            setDirection(1);
+            setIndex((prev) => (prev + 1) % categories.length);
         }, 4000);
-        return () => clearInterval(timer);
-    }, [index]);
 
-    const nextStep = () => {
-        setDirection(1);
-        setIndex((prev) => (prev + 1) % categories.length);
-    };
+        return () => {
+            if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+        };
+    }, []);
 
     const handleTabClick = (newIndex: number) => {
+        // Auto-play ni to'xtatish
+        if (autoPlayRef.current) {
+            clearInterval(autoPlayRef.current);
+        }
+
+        // Yo'nalishni aniqlash
         setDirection(newIndex > index ? 1 : -1);
         setIndex(newIndex);
+
+        // Auto-play ni qayta boshlash
+        autoPlayRef.current = setInterval(() => {
+            setDirection(1);
+            setIndex((prev) => (prev + 1) % categories.length);
+        }, 4000);
     };
 
     return (
         <section className="relative py-24 bg-[#020617] text-white overflow-hidden">
-            <div className="container mx-auto px-6 text-center">
-                {/* Header qismi */}
-                <div className="space-y-4 mb-12">
+            <div className="container mx-auto px-6">
+                {/* Header */}
+                <div className="space-y-4 mb-12 text-center">
                     <p className="text-blue-500 font-medium">Everything you need to grow online.</p>
                     <h2 className="text-5xl md:text-6xl font-bold tracking-tight">Power Your Business</h2>
                 </div>
 
-                {/* Tablar (Sell, Book, Blog, Contact) */}
-                <div className="inline-flex bg-white/5 backdrop-blur-md p-1.5 rounded-full border border-white/10 mb-16">
-                    {categories.map((cat, i) => (
-                        <button
-                            key={cat.id}
-                            onClick={() => handleTabClick(i)}
-                            className={`relative px-8 py-2.5 cursor-pointer rounded-full text-sm font-medium transition-all duration-300 ${index === i ? 'text-black' : 'text-gray-400 hover:text-white'
-                                }`}
-                        >
-                            {index === i && (
+                {/* Tablar */}
+                <div className="flex justify-center mb-16">
+                    <div className="inline-flex bg-white/5 backdrop-blur-md p-1.5 rounded-full border border-white/10">
+                        {categories.map((cat, i) => (
+                            <button
+                                key={cat.id}
+                                onClick={() => handleTabClick(i)}
+                                className={`relative px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${index === i ? 'text-black' : 'text-gray-400 hover:text-white'
+                                    }`}
+                            >
+                                {index === i && (
+                                    <motion.div
+                                        layoutId="activeTab"
+                                        className="absolute inset-0 bg-white rounded-full -z-10"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                {cat.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Carousel Container - 3 cards visible */}
+                <div className="relative w-full h-[500px] md:h-[600px] mb-12">
+                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                        {/* Chap, Markaz va O'ng cardlar */}
+                        {[-1, 0, 1].map((offset) => {
+                            const slideIndex = (index + offset + categories.length) % categories.length;
+                            const slide = categories[slideIndex];
+                            const isCenter = offset === 0;
+
+                            return (
                                 <motion.div
-                                    layoutId="activeTab"
-                                    className="absolute inset-0 bg-white rounded-full z-[-1]"
-                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                />
-                            )}
-                            {cat.label}
-                        </button>
-                    ))}
-                </div>
+                                    key={`${slideIndex}-${offset}`}
+                                    initial={false}
+                                    animate={{
+                                        x: `${offset * 75}%`, // Har bir card 75% ga siljiydi
+                                        scale: isCenter ? 1 : 0.85,
+                                        opacity: isCenter ? 1 : 0.4,
+                                        zIndex: isCenter ? 30 : 10,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 30,
+                                    }}
+                                    className={`absolute w-[85%] md:w-[70%] h-full ${!isCenter ? 'pointer-events-none' : ''
+                                        }`}
+                                >
+                                    <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                                        {/* Rasm */}
+                                        <img
+                                            src={slide.image}
+                                            alt={slide.label}
+                                            className="w-full h-full object-cover"
+                                        />
 
-                {/* Carousel qismi */}
-                <div className="relative h-[600px] w-full max-w-6xl mx-auto flex items-center justify-center">
-                    <AnimatePresence initial={false} custom={direction}>
-                        <motion.div
-                            key={index}
-                            custom={direction}
-                            initial={{ opacity: 0, x: direction > 0 ? 300 : -300, scale: 0.9 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            exit={{ opacity: 0, x: direction > 0 ? -300 : 300, scale: 0.9 }}
-                            transition={{
-                                x: { type: "spring", stiffness: 300, damping: 50 },
-                                opacity: { duration: 0.4 }
-                            }}
-                            className="absolute w-full h-full flex items-center justify-center p-4"
-                        >
-                            {/* Markaziy Card */}
-                            <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                                <img
-                                    src={categories[index].image}
-                                    alt={categories[index].label}
-                                    className="w-full h-full object-cover"
-                                />
+                                        {/* Gradient Overlay */}
+                                        <div className={`absolute inset-0 ${isCenter
+                                            ? 'bg-linear-to-t from-black/80 via-black/30 to-transparent'
+                                            : 'bg-linear-to-t from-black/60 via-black/40 to-black/20'
+                                            }`} />
 
-                                {/* Rasmdagi overlay elementlar (Placeholder sifatida) */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-12">
-                                    <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 w-full max-w-md text-left">
-                                        <h3 className="text-3xl font-bold mb-2">{categories[index].label} A Table</h3>
-                                        <p className="text-gray-300">Boost your efficiency with Webild's custom {categories[index].label.toLowerCase()} engine.</p>
+                                        {/* Content Card - faqat markazda */}
+                                        {isCenter && (
+                                            <div className="absolute inset-x-0 bottom-0 p-6 md:p-12">
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: 0.2, duration: 0.4 }}
+                                                    className="bg-white/10 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/20 max-w-2xl"
+                                                >
+                                                    <h3 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
+                                                        {slide.title}
+                                                    </h3>
+                                                    <p className="text-gray-200 text-sm md:text-base leading-relaxed">
+                                                        {slide.description}
+                                                    </p>
+                                                </motion.div>
+                                            </div>
+                                        )}
                                     </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Yon tomondagi Cardlar (Ko'rinib turadigan chekkalar) */}
-                    <div className="absolute -left-[40%] w-[35%] h-[570px] opacity-100 rounded-xl overflow-hidden pointer-events-none lg:block">
-                        <img src={categories[(index - 1 + categories.length) % categories.length].image} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="absolute -right-[40%] w-[35%] h-[570px] opacity-100 rounded-xl overflow-hidden pointer-events-none lg:block">
-                        <img src={categories[(index + 1) % categories.length].image} className="w-full h-full object-cover" />
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
 
-                {/* Carousel Dots indicator */}
-                <div className="flex justify-center gap-2 mt-12">
+                {/* Dots Indicator */}
+                <div className="flex justify-center gap-2">
                     {categories.map((_, i) => (
-                        <div
+                        <button
                             key={i}
-                            className={`h-1.5 rounded-full transition-all duration-500 ${index === i ? 'w-8 bg-white' : 'w-2 bg-gray-600'}`}
+                            onClick={() => handleTabClick(i)}
+                            className={`h-1.5 rounded-full transition-all duration-500 ${index === i ? 'w-8 bg-white' : 'w-2 bg-gray-600 hover:bg-gray-500'
+                                }`}
+                            aria-label={`Go to slide ${i + 1}`}
                         />
                     ))}
                 </div>

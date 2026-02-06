@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import SplitText from '../SplitText';
+import { ArrowRight } from 'lucide-react';
 
 const steps = [
     {
@@ -25,11 +26,11 @@ const steps = [
 
 export const HowItWorks = () => {
     return (
-        <section className="py-24 px-4 bg-white/30 backdrop-blur-sm">
+        <section className="py-24 px-4 bg-[#f5f8ff] backdrop-blur-sm">
             <div className="max-w-7xl mx-auto px-6">
 
                 {/* Header qismi */}
-                <div className="flex justify-between items-end mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 justify-between items-end mb-16">
                     <div className="space-y-2 flex flex-col items-center">
                         <span className="text-blue-500 font-medium text-sm">How It Works</span>
                         <SplitText
@@ -46,9 +47,13 @@ export const HowItWorks = () => {
                             textAlign="center"
                         />
                     </div>
-                    <Button className="bg-[#4D94FF] hover:bg-[#3b82f6] text-white rounded-full px-8 py-6 shadow-lg shadow-blue-200 transition-all active:scale-95">
-                        Get Started
-                    </Button>
+                    <button className="group relative transition-all duration-300 ease-in-out shadow-[0px_10px_20px_rgba(0,0,0,0.2)] py-2 px-5 bg-[rgb(0,107,179)] rounded-full flex items-center justify-center cursor-pointer text-white gap-2.5 font-bold border-[3px] border-white/30 outline-none overflow-hidden text-[15px] hover:scale-105 hover:border-white/60">
+                        <span className="relative z-10 flex items-center gap-2">
+                            Get Early Access
+                            <ArrowRight className="w-6 h-6 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                        </span>
+                        <div className="absolute top-0 -left-[100px] w-[100px] h-full bg-[linear-gradient(120deg,transparent_30%,rgba(255,255,255,0.8),transparent_70%)] opacity-60 group-hover:animate-shine" />
+                    </button>
                 </div>
 
                 {/* Cardlar konteyneri */}
